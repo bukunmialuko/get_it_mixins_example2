@@ -17,12 +17,6 @@ class _CreditCardScreenState extends State<CreditCardScreen>
     with GetItStateMixin {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  // String cardNumber = '';
-  // String expiryDate = '';
-  // String cardHolderName = '';
-  // String cvvCode = '';
-  // bool isCvvFocused = false;
-
   @override
   Widget build(BuildContext context) {
     print("=====> build()");
@@ -53,7 +47,6 @@ class _CreditCardScreenState extends State<CreditCardScreen>
                 obscureCardNumber: true,
                 obscureCardCvv: true,
               ),
-              Text(cardNumber),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -127,13 +120,6 @@ class _CreditCardScreenState extends State<CreditCardScreen>
   }
 
   void onCreditCardModelChange(CreditCardModel? creditCardModel) {
-    // setState(() {
-    //   cardNumber = creditCardModel!.cardNumber;
-    //   expiryDate = creditCardModel.expiryDate;
-    //   cardHolderName = creditCardModel.cardHolderName;
-    //   cvvCode = creditCardModel.cvvCode;
-    //   isCvvFocused = creditCardModel.isCvvFocused;
-    // });
     get<CardNotifier>().setCard(creditCardModel!);
     print("=====> Card No: " + get<CardNotifier>().cardNumber);
   }
