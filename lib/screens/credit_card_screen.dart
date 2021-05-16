@@ -103,6 +103,8 @@ class _CreditCardScreenState extends State<CreditCardScreen>
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             print('valid!');
+                            _showValidDialog(
+                                context, "STATUS", "Your card valid !!!");
                           } else {
                             print('invalid!');
                           }
@@ -122,5 +124,35 @@ class _CreditCardScreenState extends State<CreditCardScreen>
   void onCreditCardModelChange(CreditCardModel? creditCardModel) {
     get<CardNotifier>().setCard(creditCardModel!);
     print("=====> Card No: " + get<CardNotifier>().cardNumber);
+  }
+
+  Future _showValidDialog(
+    BuildContext context,
+    String title,
+    String content,
+  ) async {
+    showDialog<AlertDialog>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.blueAccent,
+          title:
+              Text(title, style: TextStyle(fontSize: 18, color: Colors.white)),
+          content: Text(content,
+              style: TextStyle(fontSize: 18, color: Colors.white)),
+          actions: [
+            FlatButton(
+              child: Text(
+                "Ok",
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
